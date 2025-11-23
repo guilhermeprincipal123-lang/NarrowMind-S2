@@ -1,4 +1,5 @@
 import { stem } from './stem.js';
+import fs from 'fs';
 
 /**
  * NarrowMind S2 (Statistical 2) Model
@@ -9,11 +10,57 @@ export class NarrowMindModel {
         this.rawData = data;
         this.tokens = this.parseTokens(data);
         this.sentences = this.parseSentences(data);
+        
+        // Load filler words
+        this.fillerWords = this.loadFillerWords();
+        
+        // Filter out filler words from tokens
+        this.filteredTokens = this.filterTokens(this.tokens);
+        
         // Use stemmed tokens for corpus documents (for calculations)
         this.corpusDocs = this.sentences.map(s => this.parseTokensStemmed(s));
         // Also store stemmed tokens for IDF calculation
         this.stemmedTokens = this.parseTokensStemmed(data);
         this.idfCache = this.precomputeIDF();
+    }
+    
+    /**
+     * Load filler words from fillers.json
+     * @returns {Set<string>} Set of filler words (lowercase)
+     */
+    loadFillerWords() {
+        try {
+            const fillersData = fs.readFileSync('./fillers.json', 'utf-8');
+            const fillers = JSON.parse(fillersData);
+            // Convert to Set for O(1) lookup and normalize to lowercase
+            return new Set(fillers.map(word => word.toLowerCase()));
+        } catch (error) {
+            console.warn(`Warning: Could not load fillers.json: ${error.message}. Using empty filler list.`);
+            return new Set();
+        }
+    }
+    
+    /**
+     * Filter out filler words from a token array
+     * @param {string[]} tokens - Array of tokens to filter
+     * @returns {string[]} Filtered array of tokens without filler words
+     */
+    filterTokens(tokens) {
+        if (!tokens || tokens.length === 0) return [];
+        return tokens.filter(token => {
+            const lowerToken = token.toLowerCase();
+            return !this.fillerWords.has(lowerToken);
+        });
+    }
+    
+    /**
+     * Get filtered tokens from text (parses and filters in one step)
+     * @param {string} text - Input text
+     * @returns {string[]} Array of filtered tokens (without filler words)
+     */
+    getFilteredTokens(text) {
+        const tokens = this.parseTokens(text);
+        return this.filterTokens(tokens);
     }
 
     /**
@@ -29,10 +76,14 @@ export class NarrowMindModel {
     /**
      * Parse text into stemmed tokens - used for calculations only
      * @param {string} text - Input text
+     * @param {boolean} filterFillers - Whether to filter out filler words (default: false)
      * @returns {string[]} Array of stemmed tokens
      */
-    parseTokensStemmed(text) {
-        const tokens = this.parseTokens(text);
+    parseTokensStemmed(text, filterFillers = false) {
+        let tokens = this.parseTokens(text);
+        if (filterFillers) {
+            tokens = this.filterTokens(tokens);
+        }
         return tokens.map(token => stem(token.toLowerCase()));
     }
 
