@@ -38,12 +38,11 @@ export function stem(token) {
     if (lowerToken === 'has' || lowerToken === 'had' || lowerToken === 'have') return 'hav';
     
     // Multi-step stemming: longer suffixes first, then shorter ones
-    // Step 1: Remove longer derivational suffixes
+    // Step 1: Remove longer derivational suffixes (ordered by length)
     const longSuffixes = [
-        'ational', 'tional', 'ization', 'ation', 'ator', 'alism', 'aliti',
-        'ousness', 'iveness', 'fulness', 'ousli', 'ation', 'ator',
-        'alism', 'aliti', 'ousness', 'iveness', 'fulness', 'ousli',
-        'ement', 'ment', 'able', 'ible', 'ance', 'ence', 'ness',
+        'ational', 'ization', 'tional', 'ousness', 'iveness', 'fulness',
+        'ousli', 'alism', 'aliti', 'ation', 'ator', 'ement',
+        'ment', 'able', 'ible', 'ance', 'ence', 'ness',
         'tion', 'sion', 'ing', 'ed', 'er', 'est', 'ly', 'ful', 'less'
     ];
     
