@@ -7,3 +7,4 @@ function parseTokens() {
     return tokens;
 }
 
+console.log(parseTokens())
