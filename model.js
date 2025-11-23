@@ -203,12 +203,13 @@ export class NarrowMindModel {
      * Calculate TF-IDF cosine similarity between two sentences (using stemmed tokens)
      * @param {string} sentence1 - First sentence
      * @param {string} sentence2 - Second sentence
+     * @param {boolean} filterFillers - Whether to filter out filler words (default: false)
      * @returns {number} Cosine similarity score (0-1)
      */
-    calculateTFIDFSimilarity(sentence1, sentence2) {
+    calculateTFIDFSimilarity(sentence1, sentence2, filterFillers = false) {
         // Use stemmed tokens for calculations
-        const words1 = this.parseTokensStemmed(sentence1);
-        const words2 = this.parseTokensStemmed(sentence2);
+        const words1 = this.parseTokensStemmed(sentence1, filterFillers);
+        const words2 = this.parseTokensStemmed(sentence2, filterFillers);
 
         if (words1.length === 0 || words2.length === 0) return 0;
 
@@ -236,10 +237,11 @@ export class NarrowMindModel {
      * @param {string} sentence2 - Second sentence
      * @param {number} tfidfWeight - Weight for TF-IDF (default 0.7)
      * @param {number} charWeight - Weight for character similarity (default 0.3)
+     * @param {boolean} filterFillers - Whether to filter out filler words (default: false)
      * @returns {number} Combined similarity score (0-1)
      */
-    calculateCombinedSimilarity(sentence1, sentence2, tfidfWeight = 0.7, charWeight = 0.3) {
-        const tfidfScore = this.calculateTFIDFSimilarity(sentence1, sentence2);
+    calculateCombinedSimilarity(sentence1, sentence2, tfidfWeight = 0.7, charWeight = 0.3, filterFillers = false) {
+        const tfidfScore = this.calculateTFIDFSimilarity(sentence1, sentence2, filterFillers);
         const charScore = this.calculateCharacterSimilarity(sentence1, sentence2);
         
         return (tfidfScore * tfidfWeight) + (charScore * charWeight);
@@ -251,9 +253,10 @@ export class NarrowMindModel {
      * @param {number} topN - Number of top results to return (0 = all)
      * @param {number} tfidfWeight - Weight for TF-IDF similarity (default 0.95)
      * @param {number} charWeight - Weight for character similarity (default 0.05)
+     * @param {boolean} filterWords - Whether to filter out filler words (default: false)
      * @returns {Array<[string, number]>} Array of [sentence, score] pairs, sorted by score
      */
-    rankSentences(query, topN = 0, tfidfWeight = 0.95, charWeight = 0.05) {
+    rankSentences(query, topN = 0, tfidfWeight = 0.95, charWeight = 0.05, filterWords = false) {
         if (!query || typeof query !== 'string') return [];
 
         const sentenceRanks = [];
@@ -264,7 +267,8 @@ export class NarrowMindModel {
                 query, 
                 sentence, 
                 tfidfWeight, 
-                charWeight
+                charWeight,
+                filterWords
             );
             if (similarity > 0) {
                 sentenceRanks.push([sentence, similarity]);
