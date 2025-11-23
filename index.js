@@ -136,7 +136,7 @@ async function main() {
                 }
             }
         }
-        
+
         // Find most common token from query n-grams
         console.log("\n  N-gram Analysis:");
         console.log("-".repeat(70));

@@ -508,56 +508,55 @@ export class NarrowMindModel {
     }
     
     /**
-     * Generate n-grams from a query text
-     * @param {string} query - Query text
-     * @param {number} n - N-gram size (default: 2)
+     * Find most common tokens from query n-grams that appear in the corpus
+     * @param {string} query - Query string
+     * @param {number} ngramSize - Size of n-grams to generate (default: 2 for bigrams)
      * @param {boolean} filterFillers - Whether to filter filler words (default: false)
-     * @returns {Array<Array<string>>} Array of n-gram arrays
-     */
-    generateQueryNgrams(query, n = 2, filterFillers = false) {
-        const tokens = this.parseTokensStemmed(query, filterFillers);
-        if (tokens.length < n) return [];
-        
-        const ngrams = [];
-        for (let i = 0; i <= tokens.length - n; i++) {
-            const ngram = [];
-            for (let j = 0; j < n; j++) {
-                ngram.push(tokens[i + j]);
-            }
-            ngrams.push(ngram);
-        }
-        return ngrams;
-    }
-    
-    /**
-     * Find the most common token from query n-grams that appear in corpus n-grams
-     * @param {string} query - Query text
-     * @param {number} ngramSize - N-gram size (default: 2)
-     * @param {boolean} filterFillers - Whether to filter filler words (default: false)
-     * @param {number} topN - Number of top tokens to return (default: 5)
+     * @param {number} topN - Number of top tokens to return (default: 10)
      * @returns {Array<[string, number]>} Array of [token, count] pairs, sorted by count
      */
-    findMostCommonTokenFromQueryNgrams(query, ngramSize = 2, filterFillers = false, topN = 5) {
-        const queryNgrams = this.generateQueryNgrams(query, ngramSize, filterFillers);
-        const corpusNgrams = this.ngram(ngramSize);
+    findMostCommonTokenFromQueryNgrams(query, ngramSize = 2, filterFillers = false, topN = 10) {
+        if (!query || typeof query !== 'string') return [];
         
-        // Count tokens that appear in matching n-grams
+        // Generate n-grams from query
+        const queryTokens = this.parseTokensStemmed(query, filterFillers);
+        if (queryTokens.length < ngramSize) return [];
+        
+        const queryNgrams = [];
+        for (let i = 0; i <= queryTokens.length - ngramSize; i++) {
+            const ngram = queryTokens.slice(i, i + ngramSize);
+            queryNgrams.push(ngram);
+        }
+        
+        // Generate corpus n-grams
+        const corpusNgrams = [];
+        for (let i = 0; i < this.stemmedTokens.length - ngramSize + 1; i++) {
+            const ngram = this.stemmedTokens.slice(i, i + ngramSize);
+            corpusNgrams.push(ngram);
+        }
+        
+        // Find matching n-grams and collect tokens
         const tokenCounts = new Map();
         
-        // For each query n-gram, find matching corpus n-grams
         for (const queryNgram of queryNgrams) {
-            for (const corpusNgram of corpusNgrams) {
-                // Check if query n-gram matches corpus n-gram (order matters)
+            // Check if this n-gram appears in corpus
+            for (let i = 0; i < corpusNgrams.length; i++) {
+                const corpusNgram = corpusNgrams[i];
+                
+                // Check if n-grams match (all tokens must match)
                 const matches = queryNgram.every((token, idx) => token === corpusNgram[idx]);
                 
                 if (matches) {
-                    // Count all tokens in the matching n-gram
-                    for (const token of corpusNgram) {
+                    // Count all tokens in this matching n-gram
+                    corpusNgram.forEach(token => {
                         tokenCounts.set(token, (tokenCounts.get(token) || 0) + 1);
-                    }
+                    });
                 }
             }
         }
+        
+        // Remove query tokens from results (we want tokens that co-occur, not the query itself)
+        queryTokens.forEach(token => tokenCounts.delete(token));
         
         // Sort by count and return top N
         return Array.from(tokenCounts.entries())
