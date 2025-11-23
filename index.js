@@ -94,8 +94,8 @@ async function main() {
         process.exit(1);
     }
 
-    // Initialize model
-    console.log("Initializing NarrowMind S2 model...");
+    // Initialize language model
+    console.log("Initializing NarrowMind S2 Language Model...");
     const model = new NarrowMindModel(data);
     
     // Display model information
@@ -192,15 +192,16 @@ async function main() {
             console.log("  No matching n-grams found in corpus.");
         }
 
-        // Rank sentences
+        // Rank sentences using language model scoring
         console.log("\n" + "=".repeat(70));
-        console.log("  RANKING RESULTS");
+        console.log("  LANGUAGE MODEL SCORING RESULTS");
         console.log("=".repeat(70));
-        console.log("\n  Configuration:");
+        console.log("\n  Scoring Configuration:");
         console.log("    • TF-IDF Weight: 70%");
         console.log("    • Character Weight: 10%");
         console.log("    • Co-occurrence: 20% (Jaccard)");
-        console.log("    • Filter Fillers: No\n");
+        console.log("    • Filter Fillers: No");
+        console.log("    Note: Results ranked using weighted combination of similarity metrics\n");
 
         const rankedSentences = model.rankSentences(query, 0, 0.70, 0.10, false, 0.20, 'jaccard');
 
@@ -229,7 +230,7 @@ async function main() {
             // Check for exit commands
             const trimmedQuery = query.trim().toLowerCase();
             if (trimmedQuery === 'exit' || trimmedQuery === 'quit' || trimmedQuery === 'q') {
-                console.log("\nExiting NarrowMind S2. Goodbye!\n");
+                console.log("\nExiting NarrowMind S2 Language Model. Goodbye!\n");
                 break;
             }
             
