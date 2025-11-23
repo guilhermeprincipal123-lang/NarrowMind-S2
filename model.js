@@ -235,19 +235,32 @@ export class NarrowMindModel {
     }
 
     /**
-     * Calculate combined similarity (TF-IDF + Character-level)
+     * Calculate combined similarity (TF-IDF + Character-level + optional Co-occurrence)
      * @param {string} sentence1 - First sentence
      * @param {string} sentence2 - Second sentence
      * @param {number} tfidfWeight - Weight for TF-IDF (default 0.7)
      * @param {number} charWeight - Weight for character similarity (default 0.3)
      * @param {boolean} filterFillers - Whether to filter out filler words (default: false)
+     * @param {number} coOccurrenceWeight - Weight for co-occurrence similarity (default: 0, disabled)
+     * @param {string} coOccurrenceMethod - Co-occurrence method: 'jaccard' or 'pmi' (default: 'jaccard')
      * @returns {number} Combined similarity score (0-1)
      */
-    calculateCombinedSimilarity(sentence1, sentence2, tfidfWeight = 0.7, charWeight = 0.3, filterFillers = false) {
+    calculateCombinedSimilarity(sentence1, sentence2, tfidfWeight = 0.7, charWeight = 0.3, filterFillers = false, coOccurrenceWeight = 0, coOccurrenceMethod = 'jaccard') {
         const tfidfScore = this.calculateTFIDFSimilarity(sentence1, sentence2, filterFillers);
         const charScore = this.calculateCharacterSimilarity(sentence1, sentence2);
         
-        return (tfidfScore * tfidfWeight) + (charScore * charWeight);
+        let totalWeight = tfidfWeight + charWeight;
+        let score = (tfidfScore * tfidfWeight) + (charScore * charWeight);
+        
+        // Add co-occurrence score if enabled
+        if (coOccurrenceWeight > 0) {
+            const coOccurrenceScore = this.calculateCoOccurrenceSimilarity(sentence1, sentence2, filterFillers, coOccurrenceMethod);
+            score += coOccurrenceScore * coOccurrenceWeight;
+            totalWeight += coOccurrenceWeight;
+        }
+        
+        // Normalize by total weight
+        return totalWeight > 0 ? score / totalWeight : 0;
     }
 
     /**
